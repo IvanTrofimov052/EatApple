@@ -16,7 +16,7 @@ class Robot_b:
             input_args['memory'].append("zero_zero_point")
             input_args['memory'].append("0+")
             input_args["memory"].append(0)
-            return "0+"
+            return "0+" 
 
         if(int(input_args["memory"][2]) < (int(input_args["n"]))):
             if result_last != "w" and last_progress == "+0":
