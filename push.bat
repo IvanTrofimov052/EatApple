@@ -1,0 +1,1 @@
+"C:\Users\ฬอัส\AppData\Local\Programs\Git\bin\git.exe" push
