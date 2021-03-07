@@ -1,3 +1,5 @@
+from maping import *
+
 class Robot_b:
     def __init__(self):
         self.reversed_move={
@@ -15,35 +17,47 @@ class Robot_b:
         }
 
     def make_move(self, input_args):
-        result_last = input_args["result_last"]
-        last_progress = input_args["last_progress"]
-        size_of_memory = int(input_args["size_of_memory"])
+        n = int(input_args['n'])
+        last_progress = input_args['last_progress']
         memory = input_args['memory']
-
-        if(size_of_memory != 0):
-            print(result_last)
-            print(last_progress)
-
-            if(result_last == "w" and input_args['memory'][1] == last_progress):
-                print("jscjcj")
-                input_args['memory'][1] = self.reversed_move[last_progress]
-
-                return self.reversed_move[last_progress]
-
-            elif(result_last == "w"):
-                return self.re_move[last_progress]
-
-            if input_args['memory'][1] == last_progress:
-                return  self.reversed_move[last_progress]
-            else:
-                return input_args['memory'][1]
-
+        size_of_memory = input_args["size_of_memory"]
+        result_last = input_args["result_last"]
 
         input_args["size_of_memory"] += 2
-        input_args['memory'].append("fuck")
-        input_args['memory'].append("0+")
+        input_args['memory'].append(last_progress)
+        input_args['memory'].append(result_last)
 
-        return "0+"
+        map_maze = Maping(n, size_of_memory, memory)
+
+        return map_maze.moving()
+
+
+        # result_last = input_args["result_last"]
+        # last_progress = input_args["last_progress"]
+        # size_of_memory = int(input_args["size_of_memory"])
+        # memory = input_args['memory']
+        #
+        # if(size_of_memory != 0):
+        #     print(result_last)
+        #     print(last_progress)
+        #
+        #     if(result_last == "w" and input_args['memory'][1] == last_progress):
+        #         print("jscjcj")
+        #         input_args['memory'][1] = self.reversed_move[last_progress]
+        #
+        #         return self.reversed_move[last_progress]
+        #
+        #     if input_args['memory'][1] == last_progress:
+        #         return  self.reversed_move[last_progress]
+        #     else:
+        #         return input_args['memory'][1]
+        #
+        #
+        # input_args["size_of_memory"] += 2
+        # input_args['memory'].append("fuck")
+        # input_args['memory'].append("0+")
+        #
+        # return "0+"
 
         # result_last = input_args["result_last"]
         # last_progress = input_args["last_progress"]
