@@ -108,13 +108,14 @@ class Maping:
         print(f_1[0], f_1[1])
 
         if(f_1[0] > self.robot_coords[0]):
-            return "0-"
-        elif(f_1[0] < self.robot_coords[0]):
-            return "0+"
-        elif(f_1[1] < self.robot_coords[1]):
             return "+0"
-        else:
+        elif(f_1[0] < self.robot_coords[0]):
             return "-0"
+        elif(f_1[1] < self.robot_coords[1]):
+            return "0-"
+        else:
+            return "0+"
+
 
         # for i in range(0, 4):
         #     if  self.maping[self.robot_coords[0] + self.move[brute_force[i]][0]][self.robot_coords[1] + self.move[brute_force[i]][1]] != "w":
