@@ -9,12 +9,20 @@ from collections import *
 class Maping:
     def __init__(self, n, size_of_memory, memory):
 
+        # self.move = {
+        #     "0+": (1, 0),
+        #     "0-": (-1, 0),
+        #     "+0": (0, -1),
+        #     "-0": (0, +1),
+        #     "00" : (0, 0)
+        # }
+
         self.move = {
-            "0+": (1, 0),
-            "0-": (-1, 0),
-            "+0": (0, -1),
-            "-0": (0, +1),
-            "00" : (0, 0)
+            "-0": (-1, 0),
+            "+0": (+1, 0),
+            "0+": (0, +1),
+            "0-": (0, -1),
+            "00": (0, 0)
         }
 
         self.maping = [[] for _ in range(2*n)]
@@ -58,50 +66,55 @@ class Maping:
         d = deque()
         d.append(self.robot_coords)
 
-        used = [0 for i in range(self.n * self.n * 4 + 1)]
+        used = [[-1 for i in range(self.n * 2+ 1)] for i in range(self.n * 2+ 1)]
 
-        path = []
+        path = [[[-1, -1] for i in range(self.n * 2+ 1)] for i in range(self.n * 2+ 1)]
 
         #dist = [-1 for i in range(self.n * self.n * 4 + 1)]
 
         hohol = []
 
         while(d):
+            coord = d.pop()
+            used[coord[0]][coord[1]] = 1
 
-            coords = d.pop()
-
-            print(coords[0], coords[1])
-
-            used[coords[0] * 2 * self.n + coords[1]] = 1
-
-            if(self.maping[coords[0]][coords[1]] == "nk"):
-                hohol.append(coords[0])
-                hohol.append(coords[1])
+            if self.maping[coord[0]][coord[1]] == "nk":
+                print(coord[0], coord[1])
+                hohol.append(coord[0])
+                hohol.append(coord[1])
                 break
 
-            brute_force = ["+0", "-0", "0+", "0-"]
+            brute_force = ["0+", "0-", "-0", "+0"]
 
-            for i in range(0, 4):
-                x = coords[0] + self.move[brute_force[i]][0]
-                y = coords[1] + self.move[brute_force[i]][1]
+            for i in range(4):
+                x = coord[0] + self.move[brute_force[i]][0]
+                y = coord[1] + self.move[brute_force[i]][1]
 
-                if self.checking_coords(x, y):
-                    if(self.maping[x][y] != "w"):
-                        if used[x * 2 * self.n + y] == 0:
-                            path[x * 2 * self.n + y] = coords
-                            lol = (x, y)
-                            d.append(lol)
+                if(self.maping[x][y] != "w" and used[x][y] == -1 and self.checking_coords(x,y)):
+                    d.append([x, y])
+                    path[x][y] = [coord[0], coord[1]]
 
-        # this is stupid dont forgot about path
-        # if(self.robot_coords[0] > hohol[0]):
-        #     return "0+"
-        # elif(self.robot_coords[0] < hohol[0]):
-        #     return "0-"
-        # elif(self.robot_coords[1] < hohol[1]):
-        #     return "+0"
-        # else:
-        #     return "-0"
+        print(hohol[0], hohol[1], "we go")
 
+        f = path[hohol[0]][hohol[1]]
+        f_1 = []
+
+        while(path[f[0]][f[1]][0] != -1):
+            f_1 = f
+            f = path[f[0]][f[1]]
+            pp(f)
+
+        print(self.robot_coords[0], self.robot_coords[1], "robot_coords")
+        print(f_1[0], f_1[1])
+
+        if(f_1[0] > self.robot_coords[0]):
+            return "0-"
+        elif(f_1[0] < self.robot_coords[0]):
+            return "0+"
+        elif(f_1[1] < self.robot_coords[1]):
+            return "+0"
+        else:
+            return "-0"
 
         # for i in range(0, 4):
         #     if  self.maping[self.robot_coords[0] + self.move[brute_force[i]][0]][self.robot_coords[1] + self.move[brute_force[i]][1]] != "w":
