@@ -59,7 +59,7 @@ class Maping:
             x = self.robot_coords[0] + self.move[brute_force[i]][0]
             y = self.robot_coords[1] + self.move[brute_force[i]][1]
 
-            print(brute_force[i], self.maping[sx][self.robot_coords[1] + self.move[brute_force[i]][1]] == "nk")
+            print(brute_force[i], self.maping[y][x] == "nk")
             if  self.maping[x][y] == "nk":
                 if(self.checking_coords(x, y)):
                     print(self.robot_coords[0] + self.move[brute_force[i]][0])
