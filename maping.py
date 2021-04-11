@@ -56,10 +56,14 @@ class Maping:
         brute_force = ["+0", "-0", "0+", "0-"]
 
         for i in range(0, 4):
-            print(brute_force[i], self.maping[self.robot_coords[0] + self.move[brute_force[i]][0]][self.robot_coords[1] + self.move[brute_force[i]][1]] == "nk")
-            if  self.maping[self.robot_coords[0] + self.move[brute_force[i]][0]][self.robot_coords[1] + self.move[brute_force[i]][1]] == "nk":
-                if(self.checking_coords(self.robot_coords[0] + self.move[brute_force[i]][0], self.robot_coords[1] + self.move[brute_force[i]][1])):
-                    print("wtf")
+            x = self.robot_coords[0] + self.move[brute_force[i]][0]
+            y = self.robot_coords[1] + self.move[brute_force[i]][1]
+
+            print(brute_force[i], self.maping[sx][self.robot_coords[1] + self.move[brute_force[i]][1]] == "nk")
+            if  self.maping[x][y] == "nk":
+                if(self.checking_coords(x, y)):
+                    print(self.robot_coords[0] + self.move[brute_force[i]][0])
+                    print(self.robot_coords[1] + self.move[brute_force[i]][1])
                     return brute_force[i]
 
 
@@ -75,7 +79,8 @@ class Maping:
         hohol = []
 
         while(d):
-            coord = d.pop()
+            #pp(self.maping)
+            coord = d.popleft()
             used[coord[0]][coord[1]] = 1
 
             if self.maping[coord[0]][coord[1]] == "nk":
@@ -100,12 +105,11 @@ class Maping:
         f_1 = []
 
         while(path[f[0]][f[1]][0] != -1):
+            pp(f)
             f_1 = f
             f = path[f[0]][f[1]]
-            pp(f)
 
         print(self.robot_coords[0], self.robot_coords[1], "robot_coords")
-        print(f_1[0], f_1[1])
 
         if(f_1[0] > self.robot_coords[0]):
             return "+0"
