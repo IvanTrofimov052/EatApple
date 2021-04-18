@@ -24,6 +24,7 @@ class Maping:
             "0-": (0, -1),
             "00": (0, 0)
         }
+        # вниз -- +0
 
         self.maping = [[] for _ in range(2*n)]
 
@@ -35,6 +36,7 @@ class Maping:
 
         self.robot_coords = (n-1, n-1)
 
+
         for i in range(0, size_of_memory, 2):
             if(memory[i+1] == "w"):
                 self.maping[self.robot_coords[0] + self.move[memory[i]][0]][self.robot_coords[1] + self.move[memory[i]][1]] = "w"
@@ -42,6 +44,8 @@ class Maping:
                 self.maping[self.robot_coords[0] + self.move[memory[i]][0]][self.robot_coords[1] + self.move[memory[i]][1]] = "be"
 
                 self.robot_coords = (self.robot_coords[0] + self.move[memory[i]][0], self.robot_coords[1] + self.move[memory[i]][1])
+
+
 
         self.maping[self.robot_coords[0]][self.robot_coords[1]] = "I"
 
@@ -53,6 +57,7 @@ class Maping:
         return (x >= 0) and (x < 2*self.n) and  (y >= 0) and (y < 2*self.n)
 
     def moving(self):
+        print(self.robot_coords)
         brute_force = ["+0", "-0", "0+", "0-"]
 
         for i in range(0, 4):
@@ -108,6 +113,7 @@ class Maping:
             pp(f)
             f_1 = f
             f = path[f[0]][f[1]]
+
 
         print(self.robot_coords[0], self.robot_coords[1], "robot_coords")
 

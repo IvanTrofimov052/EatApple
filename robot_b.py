@@ -27,7 +27,7 @@ class Robot_b:
         input_args['memory'].append(last_progress)
         input_args['memory'].append(result_last)
 
-        map_maze = Maping(n, size_of_memory, memory)
+        map_maze = Maping(n, size_of_memory + 2, memory + [last_progress, result_last])
 
         return map_maze.moving()
 
